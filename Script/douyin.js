@@ -13,20 +13,17 @@ if (typeof $response === "undefined") {
   let url = $request.url;
   let pattern = new RegExp(`\\d(${path.join("|")})\\?`);
   if (url.match(pattern)) {
-    $done({ url: url.replace(/\/v2\//, "/v1/") + "#scripting" });
+    $done({ url: url.replace("/v2/", "/v1/") + "#scripting" });
   } else {
     $done({});
   }
 } else {
-  let pattern = new RegExp('"room_id":(d{2,})', "g");
-  let body = $response.body.replace(pattern, '"room_id":"$1"');
-  let obj = JSON.parse(body);
+  let obj = JSON.parse($response.body);
   if (obj.data) obj.data = filter_data(obj.data);
   if (obj.aweme_list) obj.aweme_list = filter_list(obj.aweme_list);
   if (obj.aweme_detail) obj.aweme_detail = filter_detail(obj.aweme_detail);
   $done({ body: JSON.stringify(obj) });
 }
-
 
 function filter_data(array) {
   let i = array.length;
