@@ -1,5 +1,3 @@
-const enabled_live = false; // 开启直播推荐，默认关闭
-
 if (typeof $response === "undefined") {
   const path = [
     "/feed/", // 推荐
@@ -8,7 +6,8 @@ if (typeof $response === "undefined") {
     "/nearby/feed/", // 附近
     "/aweme/detail/", // 分享
     "/mix/aweme/", // 合辑
-    "/hot/search/video/list/" // 热榜
+    "/hot/search/video/list/", // 热榜
+    "/aweme/favorite/" // 喜欢
   ];
   let url = $request.url;
   let pattern = new RegExp(`\\d(${path.join("|")})\\?`);
@@ -19,6 +18,7 @@ if (typeof $response === "undefined") {
   }
 } else {
   let obj = JSON.parse($response.body);
+  delete obj.poi_op_card_list;
   if (obj.data) obj.data = filter_data(obj.data);
   if (obj.aweme_list) obj.aweme_list = filter_list(obj.aweme_list);
   if (obj.aweme_detail) obj.aweme_detail = filter_detail(obj.aweme_detail);
@@ -36,10 +36,8 @@ function filter_data(array) {
 function filter_list(array) {
   let i = array.length;
   while (i--) {
-    if (array[i].is_ads === true) {
+    if (array[i].raw_ad_data || array[i].live_reason) {
       array.splice(i, 1);
-    } else if (array[i].live_reason) {
-      if (!enabled_live) array.splice(i, 1);
     } else if (array[i].status) {
       patch(array[i]);
     }
