@@ -2,7 +2,7 @@
 #!desc=净化应用内广告
 #!system=ios
 
-# 最高支持抖音版本为16.2.0
+# 最高支持版本为16.2.0
 
 [Rule]
 URL-REGEX,^https?:\/\/api.*\.amemv\.com\/api\/ad\/splash\/,REJECT
