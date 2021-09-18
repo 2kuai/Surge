@@ -2,9 +2,11 @@
 #!desc=解决应用区域封锁
 #!system=ios
 
+# 最高支持抖音版本为21.1.0
+
 [Script]
 tiktok_re = type=http-request,pattern=^https:\/\/.*\.tiktokv\.com\/.+sys_region=CN,script-path=https://raw.githubusercontent.com/2kuai/Surge/main/Script/tiktok.js
-douyin_vod = type=http-response,pattern=^https:\/\/api-va\.tiktokv\.com\/aweme\/v\d\/(follow\/)?feed\/,requires-body=1,script-path=https://raw.githubusercontent.com/2kuai/Surge/main/Script/tiktok.js
+tiktok_vod = type=http-response,pattern=^https:\/\/api-va\.tiktokv\.com\/aweme\/v\d\/(follow\/)?feed\/,requires-body=1,script-path=https://raw.githubusercontent.com/2kuai/Surge/main/Script/tiktok.js
 
 [MITM]
 hostname = %APPEND% *.tiktokv.com
