@@ -2,7 +2,7 @@
 #!desc=解决应用区域封锁
 #!system=ios
 
-# 最高支持抖音版本为21.1.0
+# 最高支持版本为21.1.0
 
 [Script]
 tiktok_re = type=http-request,pattern=^https:\/\/.*\.tiktokv\.com\/.+sys_region=CN,script-path=https://raw.githubusercontent.com/2kuai/Surge/main/Script/tiktok.js
